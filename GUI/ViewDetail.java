@@ -40,11 +40,12 @@ public class ViewDetail extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -52,7 +53,7 @@ public class ViewDetail extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 750));
+        setPreferredSize(new java.awt.Dimension(1200, 780));
         getContentPane().setLayout(null);
 
         pic.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -67,40 +68,50 @@ public class ViewDetail extends javax.swing.JFrame {
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(740, 500, 100, 40);
 
-        jLabel3.setText("ชื่อสินค้า");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("supermarket", 1, 36)); // NOI18N
+        jLabel3.setText(p.getProductName());
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel3.setOpaque(true);
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(610, 110, 530, 46);
+        jLabel3.setBounds(640, 110, 530, 46);
 
-        jLabel4.setText("รายระเอียด");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(740, 290, 400, 190);
-
-        jLabel6.setText("หมวดหมู่");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("supermarket", 1, 18)); // NOI18N
+        jLabel6.setText(p.getCatetory().getCatetotyName());
+        jLabel6.setOpaque(true);
         getContentPane().add(jLabel6);
         jLabel6.setBounds(740, 230, 261, 51);
 
-        jLabel5.setText("ราคา");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("supermarket", 1, 18)); // NOI18N
+        jLabel5.setText(p.getPrice()+"");
+        jLabel5.setOpaque(true);
         getContentPane().add(jLabel5);
         jLabel5.setBounds(740, 170, 150, 51);
 
-        jLabel7.setFont(new java.awt.Font("supermarket", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("supermarket", 1, 24)); // NOI18N
         jLabel7.setText("จำนวน:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(660, 500, 80, 30);
 
-        jLabel8.setFont(new java.awt.Font("supermarket", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("supermarket", 1, 24)); // NOI18N
         jLabel8.setText("ราคา:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(670, 180, 40, 30);
+        jLabel8.setBounds(670, 180, 50, 30);
 
-        jLabel9.setFont(new java.awt.Font("supermarket", 0, 18)); // NOI18N
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText(p.getDescription());
+        jScrollPane1.setViewportView(jTextArea1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(740, 300, 390, 190);
+
+        jLabel9.setFont(new java.awt.Font("supermarket", 1, 24)); // NOI18N
         jLabel9.setText("หมวดหมู่:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(650, 230, 60, 30);
+        jLabel9.setBounds(640, 230, 90, 30);
 
         jButton1.setText("หยิบลงตะกร้า");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,10 +131,10 @@ public class ViewDetail extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(490, 660, 130, 40);
 
-        jLabel10.setFont(new java.awt.Font("supermarket", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("supermarket", 1, 24)); // NOI18N
         jLabel10.setText("รายละเอียด:");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(650, 300, 80, 30);
+        jLabel10.setBounds(620, 300, 110, 30);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/image/system/bgit.jpg"))); // NOI18N
         jLabel11.setText("jLabel11");
@@ -195,12 +206,13 @@ public class ViewDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel pic;
     // End of variables declaration//GEN-END:variables
 }
