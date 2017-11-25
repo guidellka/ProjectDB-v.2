@@ -50,6 +50,7 @@ public class Login extends javax.swing.JFrame {
         passwordField.setOpaque(false);
         getContentPane().add(passwordField);
         passwordField.setBounds(470, 230, 340, 30);
+        passwordField.setBackground(new java.awt.Color(70, 229, 155,0));
 
         jLabel1.setFont(new java.awt.Font("WP DOMINO novel", 1, 48)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/image/system/login.png"))); // NOI18N

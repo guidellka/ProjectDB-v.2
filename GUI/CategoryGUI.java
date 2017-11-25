@@ -2,6 +2,7 @@ package GUI;
 
 import database.DBManagement;
 import java.awt.Image;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.BillItem;
 import model.Customer;
 import model.Product;
 
@@ -20,9 +22,11 @@ public class CategoryGUI extends javax.swing.JFrame {
 
     private Customer ct;
     private ProductPanel[] allItem;
+    private BillItem bi [];
 
-    public CategoryGUI(Customer ct, int catetoryNo) {
+    public CategoryGUI(Customer ct, int catetoryNo,BillItem[] bi) {
         this.ct = ct;
+        this.bi = bi;
         JPanel subPanel = new JPanel();
         try {
             String sql = "Select * from Product p JOIN Catetory c ON p.catetory_no=c.catetory_no "
@@ -30,30 +34,33 @@ public class CategoryGUI extends javax.swing.JFrame {
             Statement st = DBManagement.getCn().createStatement();
             ResultSet rs = st.executeQuery(sql);
             int countProdect = countProduct(catetoryNo);
-
-//            changeComboBox(catetoryNo);
-
             allItem = new ProductPanel[countProdect];
             subPanel.setSize(930, countProdect * 200);
-
             for (int i = 0; i < allItem.length; i++) {
                 rs.next();
                 Product product = new Product();
                 DBManagement.ormProduct(rs, product);
-                ProductPanel p = new ProductPanel(product);
+                ProductPanel p = new ProductPanel(product,this, bi,this.ct);
                 subPanel.add(p);
                 allItem[i] = p;
             }
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        }
+        } 
         subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
         initComponents();
         jScrollPane1.setViewportView(subPanel);
+        changeComboBox(catetoryNo);
+        
+        for (BillItem i: bi) {
+            if(i != null){
+                System.out.println(i);
+            }
+        }
+        System.out.println("---------------------------");
     }
 
-    public CategoryGUI(Customer ct, String search) {
+    public CategoryGUI(Customer ct, String search,BillItem[] bi) {
         this.ct = ct;
         JPanel subPanel = new JPanel();
         try {
@@ -69,36 +76,41 @@ public class CategoryGUI extends javax.swing.JFrame {
                 rs.next();
                 Product product = new Product();
                 DBManagement.ormProduct(rs, product);
-                ProductPanel p = new ProductPanel(product);
+                ProductPanel p = new ProductPanel(product, this, bi,this.ct);
                 subPanel.add(p);
                 allItem[i] = p;
             }
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
         initComponents();
         jScrollPane1.setViewportView(subPanel);
-
+        
+        for (BillItem i: bi) {
+            if(i != null){
+                System.out.println(i);
+            }
+        }
+        System.out.println("---------------------------");
     }
 
-//    public void changeComboBox(int catetoryNo) {
-//        switch (catetoryNo) {
-//            case 1:
-//                jComboBox1.setSelectedIndex(1);
-//                break;
-//            case 2:
-//                jComboBox1.setSelectedIndex(2);
-//                break;
-//            case 3:
-//                jComboBox1.setSelectedIndex(3);
-//                break;
-//            case 4:
-//                jComboBox1.setSelectedIndex(4);
-//                break;
-//        }
-//    }
+    public void changeComboBox(int catetoryNo) {
+        switch (catetoryNo) {
+            case 1:
+                jComboBox1.setSelectedIndex(1);
+                break;
+            case 2:
+                jComboBox1.setSelectedIndex(2);
+                break;
+            case 3:
+                jComboBox1.setSelectedIndex(3);
+                break;
+            case 4:
+                jComboBox1.setSelectedIndex(4);
+                break;
+        }
+    }
 
     public int countProduct(int catetoryNo) {
         int count = 0;
@@ -134,6 +146,7 @@ public class CategoryGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -155,9 +168,19 @@ public class CategoryGUI extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jComboBox1.setFont(new java.awt.Font("supermarket", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ทั้งหมด", "กระเป๋าสะพายหลัง", "กระเป๋าสะพายข้าง", "กระเป๋าถือ" ,"กระเป๋าสตางค์"}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "หมวดหมู่", "กระเป๋าสะพายหลัง", "กระเป๋าสะพายข้าง", "กระเป๋าถือ" ,"กระเป๋าสตางค์"}));
         getContentPane().add(jComboBox1);
         jComboBox1.setBounds(140, 140, 180, 40);
+
+        jButton1.setFont(new java.awt.Font("supermarket", 0, 20)); // NOI18N
+        jButton1.setText("เลือก");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(330, 140, 90, 40);
 
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -252,11 +275,38 @@ public class CategoryGUI extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            CategoryGUI cg = new CategoryGUI(ct, jTextField1.getText());
+            CategoryGUI cg = new CategoryGUI(ct, jTextField1.getText(), bi);
             cg.setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        CategoryGUI cg;
+        switch (jComboBox1.getSelectedIndex()) {
+            case 1:
+                cg = new CategoryGUI(ct, 1, bi);
+                cg.setVisible(true);
+                setVisible(false);
+                break;
+            case 2:
+                cg = new CategoryGUI(ct, 2, bi);
+                cg.setVisible(true);
+                setVisible(false);
+                break;
+            case 3:
+                cg = new CategoryGUI(ct, 3, bi);
+                cg.setVisible(true);
+                setVisible(false);
+                break;
+            case 4:
+                cg = new CategoryGUI(ct, 4, bi);
+                cg.setVisible(true);
+                setVisible(false);
+                break;
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,7 +335,7 @@ public class CategoryGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+       
         /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
@@ -295,6 +345,7 @@ public class CategoryGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;

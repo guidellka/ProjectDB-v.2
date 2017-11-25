@@ -9,15 +9,25 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.BillItem;
 import model.Customer;
+import model.Product;
 
 public class News extends javax.swing.JFrame {
 
     private Customer ct;
+    private BillItem bi[] = new BillItem[10];
 
     public News(Customer ct) {
         this.ct = ct;
         initComponents();
+    }
+
+    public News(Customer ct,BillItem[] bi) {
+        this.ct = ct;
+        this.bi = bi;
+        initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -184,41 +194,40 @@ public class News extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        CategoryGUI cg = new CategoryGUI(ct, 1);
+        CategoryGUI cg = new CategoryGUI(ct, 1,bi);
         cg.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        CategoryGUI cg = new CategoryGUI(ct, 2);
+        CategoryGUI cg = new CategoryGUI(ct, 2, bi);
         cg.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        CategoryGUI cg = new CategoryGUI(ct, 3);
+        CategoryGUI cg = new CategoryGUI(ct, 3, bi);
         cg.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        CategoryGUI cg = new CategoryGUI(ct, 4);
+        CategoryGUI cg = new CategoryGUI(ct, 4, bi);
         cg.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            CategoryGUI cg = new CategoryGUI(ct, jTextField1.getText());
+            CategoryGUI cg = new CategoryGUI(ct, jTextField1.getText(), bi);
             cg.setVisible(true);
             setVisible(false);
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        ViewUser v = new ViewUser(ct);
-        v.setVisible(true);
-        setVisible(false);
+
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**

@@ -1,22 +1,36 @@
 package GUI;
 
+import database.DBManagement;
 import java.awt.Image;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import model.BillItem;
+import model.Customer;
 import model.Product;
 
 public class ProductPanel extends javax.swing.JPanel {
 
     private Product p = new Product();
+    private Customer ct;
+    private CategoryGUI g;
+    private BillItem bi[];
 
-    public ProductPanel(Product input) {
+    public ProductPanel(Product input, CategoryGUI g, BillItem[] bi, Customer ct) {
         p = input;
+        this.ct = ct;
+        this.g = g;
+        this.bi = bi;
         initComponents();
         pic.setIcon(ResizeImageForApp(pic, p.getImageProduct()));
     }
 
     public ImageIcon ResizeImageForApp(JLabel picPlace, String filePicture) {
-        ImageIcon myPic = new ImageIcon(getClass().getResource("/GUI/image/product/1.A0001.jpg"));
+        ImageIcon myPic = new ImageIcon(getClass().getResource("/GUI/image/product/" + filePicture));
         Image img = myPic.getImage();
         Image newImg = img.getScaledInstance(picPlace.getWidth(), picPlace.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(newImg);
@@ -58,7 +72,13 @@ public class ProductPanel extends javax.swing.JPanel {
         add(pic);
         pic.setBounds(33, 13, 308, 174);
 
+        jButton1.setFont(new java.awt.Font("supermarket", 0, 20)); // NOI18N
         jButton1.setText("รายละเอียด");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1);
         jButton1.setBounds(550, 150, 113, 39);
 
@@ -83,6 +103,24 @@ public class ProductPanel extends javax.swing.JPanel {
         add(jLabel5);
         jLabel5.setBounds(390, 100, 50, 30);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String sql = "Select * from Product p JOIN Catetory c ON p.catetory_no=c.catetory_no "
+                    + "where product_no=" + p.getProductNo();
+            Statement st = DBManagement.getCn().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            rs.next();
+            Product product = new Product();
+            product = DBManagement.ormProduct(rs, product);
+            ViewDetail v = new ViewDetail(ct, product, g, bi);
+            v.setVisible(true);
+            g.setVisible(false);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

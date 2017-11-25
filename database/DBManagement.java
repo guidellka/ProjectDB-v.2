@@ -37,7 +37,7 @@ public class DBManagement {
             customer.setTelNo(tel_no);
             customer.setCustomerInviteNo(customerInviteNo);
             customer.setStatus(status);
-
+            
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
