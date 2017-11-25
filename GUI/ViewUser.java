@@ -1,13 +1,16 @@
 package GUI;
 
+import model.BillItem;
 import model.Customer;
 
 
 public class ViewUser extends javax.swing.JFrame {
     private Customer ct;
+    private BillItem bi[];
     
-    public ViewUser(Customer ct) {
-        this.ct = ct;
+    public ViewUser(Customer ct,BillItem[] bi) {
+        this.ct = ct; 
+        this.bi = bi;
         initComponents();
     }
 
@@ -39,6 +42,7 @@ public class ViewUser extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("jLabel14");
@@ -95,14 +99,14 @@ public class ViewUser extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(400, 420, 100, 30);
 
-        jButton2.setText("ย้อนกลับ");
+        jButton2.setText("ดูข้อมูลผู้เเนะนำ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(280, 420, 100, 30);
+        jButton2.setBounds(400, 350, 120, 40);
 
         jLabel15.setFont(new java.awt.Font("supermarket", 1, 22)); // NOI18N
         jLabel15.setText("ชื่อ");
@@ -137,6 +141,15 @@ public class ViewUser extends javax.swing.JFrame {
         getContentPane().add(jTextField5);
         jTextField5.setBounds(230, 350, 150, 40);
 
+        jButton3.setText("ย้อนกลับ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(280, 420, 100, 30);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -145,6 +158,10 @@ public class ViewUser extends javax.swing.JFrame {
         n.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+//        ViewInvite vn = new ViewInvite(ct,bi);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +197,7 @@ public class ViewUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

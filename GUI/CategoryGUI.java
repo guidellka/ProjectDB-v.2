@@ -250,7 +250,7 @@ public class CategoryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-        ViewUser v = new ViewUser(ct);
+        ViewUser v = new ViewUser(ct,bi);
         v.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jLabel15MouseClicked

@@ -29,6 +29,10 @@ public class Catetory {
         return "Catetory{" + "catetoryNo=" + catetoryNo + ", catetotyName=" + catetotyName + '}';
     }
 
+    public String getCatetoryName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
    
 }

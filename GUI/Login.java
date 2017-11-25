@@ -111,9 +111,15 @@ public class Login extends javax.swing.JFrame {
                 System.out.println(ex.getMessage());
             }
             if (result) {
-                News n = new News(ct);
-                n.setVisible(true);
-                setVisible(false);
+                if (ct.isStatus()) {
+                    ManageProduct m = new ManageProduct(ct);
+                    m.setVisible(true);
+                    setVisible(false);
+                } else {
+                    News n = new News(ct);
+                    n.setVisible(true);
+                    setVisible(false);
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Username or Password incorrect");
                 usernameField.setText(null);

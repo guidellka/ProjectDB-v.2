@@ -5,15 +5,15 @@
  */
 package GUI;
 
+import model.Customer;
+
 /**
  *
  * @author Windows8.1
  */
 public class ViewInvite extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ViewInvite
-     */
+    private Customer ct; 
     public ViewInvite() {
         initComponents();
     }
