@@ -52,12 +52,6 @@ public class CategoryGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(subPanel);
         changeComboBox(catetoryNo);
         
-        for (BillItem i: bi) {
-            if(i != null){
-                System.out.println(i);
-            }
-        }
-        System.out.println("---------------------------");
     }
 
     public CategoryGUI(Customer ct, String search,BillItem[] bi) {
@@ -87,12 +81,6 @@ public class CategoryGUI extends javax.swing.JFrame {
         initComponents();
         jScrollPane1.setViewportView(subPanel);
         
-        for (BillItem i: bi) {
-            if(i != null){
-                System.out.println(i);
-            }
-        }
-        System.out.println("---------------------------");
     }
 
     public void changeComboBox(int catetoryNo) {
