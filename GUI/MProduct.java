@@ -1,5 +1,6 @@
 package GUI;
 
+import javax.swing.JLabel;
 import model.Customer;
 import model.Product;
 
@@ -8,12 +9,27 @@ public class MProduct extends javax.swing.JPanel {
     private Product p = new Product();
     private Customer ct;
     private ManageProduct m;
+    private String label; 
 
-    public MProduct(Product p, ManageProduct m, Customer ct) {
+
+    public MProduct(Product p, ManageProduct m, Customer ct,String label) {
+       
         this.p = p;
         this.ct = ct;
         this.m = m;
+        
         initComponents();
+        this.label = label;
+        jLabel3.setText(this.label);
+        
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +62,7 @@ public class MProduct extends javax.swing.JPanel {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("supermarket", 0, 20)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(p.getCatetory().getCatetotyName());
+        jLabel3.setText(this.label);
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel3.setOpaque(true);
         add(jLabel3);
@@ -77,8 +93,20 @@ public class MProduct extends javax.swing.JPanel {
 
         jToggleButton1.setFont(new java.awt.Font("supermarket", 0, 20)); // NOI18N
         jToggleButton1.setText("แก้ไข");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         add(jToggleButton1);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        EditProduct e = new EditProduct(p,this,ct);
+        e.setVisible(true);
+        m.setVisible(false);
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

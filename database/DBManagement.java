@@ -53,7 +53,7 @@ public class DBManagement {
             catetory.setCatetotyName(catetotyName);
 
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return catetory;
     }
@@ -110,6 +110,34 @@ public class DBManagement {
         }
         return product;
     }
+    public static Product ormProduct(ResultSet rs2,ResultSet rs,Product product){
+         try {
+            int productNo = rs.getInt("product_no");
+            String productName = rs.getString("product_name");
+            Catetory catetory = new Catetory();
+            if(rs2.next()){
+            ormCatetory(rs2, catetory);
+            }
+            int quantity = rs.getInt("quantity");
+            double price = rs.getInt("price");
+            String imageProduct = rs.getString("img_product");
+            String description = rs.getString("description");
+
+            product.setProductNo(productNo);
+            product.setProductName(productName);
+            product.setCatetory(catetory);
+            product.setQuantity(quantity);
+            product.setPrice(price);
+            product.setImageProduct(imageProduct);
+            product.setDescription(description);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return product;
+        
+    }
+    
 
     public static Bill ormBill(ResultSet rs, Bill bill) {
         try {

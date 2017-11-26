@@ -67,7 +67,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="p.getCatetory().getCatetotyName()" type="code"/>
+          <Connection code="this.label" type="code"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -144,6 +144,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xe41;&#xe01;&#xe49;&#xe44;&#xe02;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -1,6 +1,7 @@
 package GUI;
 
 import database.DBManagement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,7 @@ public class ManageProduct extends javax.swing.JFrame {
         this.ct = ct;
         JPanel subPanel = new JPanel();
         try {
+
             String sql = "Select * from Product p JOIN Catetory c ON p.catetory_no=c.catetory_no";
             Statement st = DBManagement.getCn().createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -31,7 +33,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 rs.next();
                 Product product = new Product();
                 DBManagement.ormProduct(rs, product);
-                MProduct p = new MProduct(product, this, this.ct);
+                MProduct p = new MProduct(product, this, this.ct, rs.getString("catetory_name"));
                 subPanel.add(p);
                 allProduct[i] = p;
             }
@@ -47,23 +49,37 @@ public class ManageProduct extends javax.swing.JFrame {
         this.ct = ct;
         JPanel subPanel = new JPanel();
         try {
-            String sql = "Select * from Product p JOIN Catetory c ON p.catetory_no=c.catetory_no "
-                    + "WHERE p.catetory_no=" + catetoryNo;
-            Statement st = DBManagement.getCn().createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            String sql1 = "Select * from Catetory WHERE catetory_no=" + catetoryNo;
 
+            String sql2 = "SELECT * "
+                    + "FROM Product "
+                    + "WHERE Catetory_no IN (SELECT Catetory_no from Catetory WHERE Catetory_no =" + catetoryNo + ") ";
+            Statement st = DBManagement.getCn().createStatement();
+            
+            ResultSet rs1 = st.executeQuery(sql1);
+            String catName = "";
+            if(rs1.next()){
+            catName = rs1.getString("catetory_name");
+             
+            }            
+            ResultSet rs2 = st.executeQuery(sql2);
+            PreparedStatement pstm = DBManagement.getCn().prepareStatement(sql1);
+            ResultSet rs3 = pstm.executeQuery();
             int countProdect = countProduct(catetoryNo);
             allProduct = new MProduct[countProdect];
             subPanel.setSize(750, countProdect * 50);
+            System.out.println(catName);
             for (int i = 0; i < allProduct.length; i++) {
-                rs.next();
+                rs2.next();
                 Product product = new Product();
-                DBManagement.ormProduct(rs, product);
-                MProduct p = new MProduct(product, this, this.ct);
+                DBManagement.ormProduct(rs3,rs2, product);
+                MProduct p = new MProduct(product, this, this.ct, catName);
                 subPanel.add(p);
                 allProduct[i] = p;
+                
             }
         } catch (SQLException ex) {
+            
             System.out.println(ex.getMessage());
         }
         subPanel.setLayout(new BoxLayout(subPanel, BoxLayout.Y_AXIS));
@@ -87,7 +103,7 @@ public class ManageProduct extends javax.swing.JFrame {
                 rs.next();
                 Product product = new Product();
                 DBManagement.ormProduct(rs, product);
-                MProduct p = new MProduct(product, this, this.ct);
+                MProduct p = new MProduct(product, this, this.ct,rs.getString("catetory_name"));
                 subPanel.add(p);
                 allProduct[i] = p;
             }
@@ -310,7 +326,9 @@ public class ManageProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        AddProduct a = new AddProduct();
+        a.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
@@ -368,7 +386,7 @@ public class ManageProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
-      if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             ManageProduct mp = new ManageProduct(ct, jTextField1.getText());
             mp.setVisible(true);
             setVisible(false);

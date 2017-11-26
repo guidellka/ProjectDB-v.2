@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import model.Customer;
+import model.Product;
+
 /**
  *
  * @author Windows8.1
@@ -14,7 +17,14 @@ public class EditProduct extends javax.swing.JFrame {
     /**
      * Creates new form EditProduct
      */
-    public EditProduct() {
+    Product p;
+    MProduct m;
+    Customer ct;
+
+    public EditProduct(Product p, MProduct m, Customer ct) {
+        this.p = p;
+        this.m = m;
+        this.ct = ct;
         initComponents();
     }
 
@@ -237,11 +247,11 @@ public class EditProduct extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditProduct().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new EditProduct().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
