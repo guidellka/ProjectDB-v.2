@@ -48,6 +48,7 @@ public class EditProduct extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -108,7 +109,7 @@ public class EditProduct extends javax.swing.JFrame {
         jLabel7.setBounds(435, 280, 90, 30);
 
         jButton5.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        jButton5.setText("ยืนยัน");
+        jButton5.setText("ลบสินค้า");
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +117,7 @@ public class EditProduct extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton5);
-        jButton5.setBounds(420, 440, 100, 30);
+        jButton5.setBounds(460, 440, 100, 30);
 
         jButton1.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
         jButton1.setText("อัพโหลด");
@@ -137,7 +138,18 @@ public class EditProduct extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton6);
-        jButton6.setBounds(310, 440, 100, 30);
+        jButton6.setBounds(240, 440, 100, 30);
+
+        jButton7.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
+        jButton7.setText("ยืนยัน");
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(350, 440, 100, 30);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -220,6 +232,10 @@ public class EditProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,6 +275,7 @@ public class EditProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
