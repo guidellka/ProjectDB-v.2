@@ -211,7 +211,7 @@ public class ManageProduct extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(420, 140, 170, 170);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/image/system/Mproduct.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/image/system/Mproduct2.png")));
         jLabel8.setText("jLabel8");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(220, 410, 770, 50);

@@ -26,6 +26,7 @@ public class EditProduct extends javax.swing.JFrame {
         this.m = m;
         this.ct = ct;
         initComponents();
+                
     }
 
     /**
